@@ -1,0 +1,156 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf510
+{\fonttbl\f0\fnil\fcharset0 Verdana;\f1\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720
+
+\f0\fs26 \cf0 \'a0 /*\'a0 Author:\'a0 Jose Hernandez\'a0 1415865\'a0\'a0
+\f1\fs24 \
+
+\f0\fs26 \'a0\'a0\'a0\'a0 Subject:\'a0\'a0\'a0\'a0\'a0\'a0 COP 3804\'a0\'a0 M-Th 5:00
+\f1\fs24 \
+
+\f0\fs26 \'a0\'a0\'a0\'a0 Instructor:\'a0 Norman Pestaina\'a0 ECS 364
+\f1\fs24 \
+
+\f0\fs26 \'a0\'a0\'a0\'a0 Assigment:\'a0 1 Formating dates\'a0\'a0\'a0 DUE Sunday 07/06;
+\f1\fs24 \
+
+\f0\fs26 \'a0\'a0\'a0\'a0 Oath: I certify that this work is my own and that
+\f1\fs24 \
+
+\f0\fs26 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 none of it is the work of any other person.
+\f1\fs24 \
+
+\f0\fs26 */
+\f1\fs24 \
+
+\f0\fs26 \'a0
+\f1\fs24 \
+\
+
+\f0\fs26 import javax.swing.JOptionPane;
+\f1\fs24 \
+
+\f0\fs26 public class PlayGame
+\f1\fs24 \
+
+\f0\fs26 \{
+\f1\fs24 \
+
+\f0\fs26 \'a0\'a0\'a0 public static void main(String[] args)
+\f1\fs24 \
+
+\f0\fs26 \'a0\'a0\'a0 \{
+\f1\fs24 \
+
+\f0\fs26 \'a0	\'a0\'a0 GamePlayer game;
+\f1\fs24 \
+
+\f0\fs26 \'a0	\'a0\'a0
+\f1\fs24 \
+
+\f0\fs26 \'a0	\'a0\'a0 String gameName = JOptionPane.showInputDialog("Which game do you wish to play?");
+\f1\fs24 \
+
+\f0\fs26 \'a0	\'a0\'a0 if (gameName.equalsIgnoreCase("hangman"))
+\f1\fs24 \
+
+\f0\fs26 \'a0	\'a0\'a0 \{
+\f1\fs24 \
+
+\f0\fs26 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0
+\f1\fs24 \
+
+\f0\fs26 \'a0		\'a0\'a0 game = new HangMan();
+\f1\fs24 \
+
+\f0\fs26 \'a0	\'a0\'a0 \}
+\f1\fs24 \
+
+\f0\fs26 \'a0	\'a0\'a0 else
+\f1\fs24 \
+
+\f0\fs26 \'a0		\'a0\'a0 throw new RuntimeException(gameName + ": No such game available");
+\f1\fs24 \
+
+\f0\fs26 \'a0		\'a0\'a0
+\f1\fs24 \
+
+\f0\fs26 \'a0	\'a0\'a0 System.out.println( game );
+\f1\fs24 \
+
+\f0\fs26 \'a0	\'a0\'a0
+\f1\fs24 \
+
+\f0\fs26 \'a0	\'a0\'a0 while ( !game.isOver() )
+\f1\fs24 \
+
+\f0\fs26 \'a0	\'a0\'a0 \{
+\f1\fs24 \
+
+\f0\fs26 \'a0		\'a0\'a0 if ( game.isPlayersTurn() )
+\f1\fs24 \
+
+\f0\fs26 \'a0		\'a0\'a0 \{
+\f1\fs24 \
+
+\f0\fs26 \'a0			\'a0\'a0 String move;
+\f1\fs24 \
+
+\f0\fs26 \'a0			\'a0\'a0
+\f1\fs24 \
+
+\f0\fs26 \'a0			\'a0\'a0 do
+\f1\fs24 \
+
+\f0\fs26 \'a0			\'a0\'a0 \{
+\f1\fs24 \
+
+\f0\fs26 \'a0				\'a0\'a0 move = game.getPlayerMove();
+\f1\fs24 \
+
+\f0\fs26 \'a0			\'a0\'a0 \} while ( !game.isValidMove(move) );
+\f1\fs24 \
+
+\f0\fs26 \'a0			\'a0\'a0
+\f1\fs24 \
+
+\f0\fs26 \'a0			\'a0\'a0 game.playerMoves(move);
+\f1\fs24 \
+
+\f0\fs26 \'a0		\'a0\'a0 \}
+\f1\fs24 \
+
+\f0\fs26 \'a0		\'a0\'a0 else
+\f1\fs24 \
+
+\f0\fs26 \'a0			\'a0\'a0 game.computerMoves();
+\f1\fs24 \
+
+\f0\fs26 \'a0			\'a0\'a0
+\f1\fs24 \
+
+\f0\fs26 \'a0		\'a0\'a0 System.out.println( game );
+\f1\fs24 \
+
+\f0\fs26 \'a0	\'a0\'a0 \}
+\f1\fs24 \
+
+\f0\fs26 \'a0	\'a0\'a0
+\f1\fs24 \
+
+\f0\fs26 \'a0	\'a0\'a0 JOptionPane.showMessageDialog(null,
+\f1\fs24 \
+
+\f0\fs26 \'a0				\'a0\'a0 (game.playerWins() ?
+\f1\fs24 \
+
+\f0\fs26 \'a0					"Congratulations! You won" : "Sorry. You lost") );
+\f1\fs24 \
+
+\f0\fs26 \'a0\'a0\'a0 \}
+\f1\fs24 \
+
+\f0\fs26 \}}
